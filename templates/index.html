@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Explore Konkan's mangroves with Khavane Kayak. Book unforgettable kayaking adventures for all skill levels."
+    />
+    <meta
+      name="keywords"
+      content="kayaking, Konkan, mangroves, adventure, tours, Maharashtra"
+    />
+    <meta name="author" content="Khavane Kayak" />
+    <title>Khavane Kayak - Explore Konkan's Mangroves</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/styles.css') }}"
+  />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/static/img/LOGO_1.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/static/img/LOGO_1.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/static/img/LOGO_1.png"
+    />
+    <link rel="manifest" href="/static/img/LOGO_1.png" />
+
+    
+  </head>
+
+  <body>
+    <nav class="navbar" role="navigation">
+      <a href="#" class="logo" aria-label="Khavane Kayak Home">
+        <img
+          src="/static/img/LOGO_1.png"
+          alt="Khavane Kayak Logo"
+          class="logo-img"
+        />
+        <span class="logo-text">Khavane Kayaks</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#booking" class="book-now">Book Now</a>
+      </div>
+    </nav>
+
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <h1>Experience the Thrill of Kayaking</h1>
+        <p>
+          Paddle through Konkan's hidden mangroves and discover untouched
+          natural beauty. Perfect for adventurers of all levels!
+        </p>
+        <div class="hero-btns">
+          <a href="#booking" class="btn btn-primary">Book Your Adventure</a>
+          <a href="#booking" class="btn btn-primary">Explore Tours</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about section">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text">
+            <h2>About Khavane Kayak</h2>
+            <p>
+              At Khavane Kayaks, we invite you to paddle through paradise!
+              Nestled in the serene beauty of Vengurla, we offer unforgettable
+              kayaking experiences through lush mangrove forests and peaceful
+              backwaters, covering scenic routes of 3-4 km.
+            </p>
+            <p>
+              Come discover the raw beauty of Konkan with us, where every paddle
+              stroke brings you closer to nature. Whether you're chasing
+              adventure or seeking peace, Khavane Kayaks is your go-to kayaking
+              destination.
+            </p>
+            <div class="about-features">
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <i class="fas fa-shield-alt"></i>
+                </div>
+                <p>
+                  100% Safety Record with certified guides and top-quality
+                  equipment
+                </p>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <i class="fas fa-leaf"></i>
+                </div>
+                <p>Eco-friendly tours that preserve the natural environment</p>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <i class="fas fa-smile"></i>
+                </div>
+                <p>
+                  Custom experiences for all skill levels from beginners to
+                  experts
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="about-image">
+            <img
+              src="/static/img/about.webp"
+              alt="Kayaking in mangroves"
+              class="about-img"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="services section">
+      <div class="container">
+        <h2 class="section-title">Our Kayaking Tours</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon-container">
+              <img
+                src="/static/img/s1.png"
+                alt="Mangrove Exploration"
+                class="service-icon"
+              />
+            </div>
+            <h3>Stunning routes through hidden mangroves</h3>
+            <p>
+              Explore breathtaking waterways surrounded by lush green mangroves,
+              offering a peaceful and scenic kayaking experience in Konkan.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon-container">
+              <img
+                src="/static/img/s2.png"
+                alt="Safety Measures"
+                class="service-icon"
+              />
+            </div>
+            <h3>Safety measures and professional guides</h3>
+            <p>
+              Our expert guides ensure a safe adventure with top quality gear,
+              life jackets, and safety briefings before every kayaking trip.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon-container">
+              <img
+                src="/static/img/s4.png"
+                alt="All Skill Levels"
+                class="service-icon"
+              />
+            </div>
+            <h3>Perfect for beginners and experienced paddlers</h3>
+            <p>
+              Whether you're a first-timer or a pro, our kayaking experience is
+              tailored to all skill levels for maximum enjoyment.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon-container">
+              <img
+                src="/static/img/s3.png"
+                alt="Group Options"
+                class="service-icon"
+              />
+            </div>
+            <h3>Family-friendly and group-friendly options</h3>
+            <p>
+              Enjoy kayaking with family, friends, or groups, with special
+              packages designed for team outings, school trips, and adventure
+              seekers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="gallery section">
+      <div class="container">
+        <h2 class="section-title">Gallery</h2>
+        <div class="swiper gallery-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide gallery-slide">
+              <img
+                src="/static/img/IMG_1003.jpeg"
+                alt="Kayaking in mangroves"
+              />
+            </div>
+            <div class="swiper-slide gallery-slide">
+              <img src="/static/img/G1.webp" alt="Sunset kayaking" />
+            </div>
+            <div class="swiper-slide gallery-slide">
+              <img src="/static/img/IMG_0999.PNG" alt="Group kayaking" />
+            </div>
+            <div class="swiper-slide gallery-slide">
+              <img src="/static/img/P5.png" alt="Wildlife spotting" />
+            </div>
+            <div class="swiper-slide gallery-slide">
+              <img src="/static/img/P4.png" alt="Kayak equipment" />
+            </div>
+            <div class="swiper-slide gallery-slide">
+              <img src="/static/img/P7.png" alt="Kayak equipment" />
+            </div>
+            <div class="swiper-slide gallery-slide">
+              <img src="/static/img/pic1.png" alt="Kayak equipment" />
+            </div>
+            <div class="swiper-slide gallery-slide">
+              <img src="/static/img/p9.webp" alt="Kayak equipment" />
+            </div>
+            <div class="swiper-slide gallery-slide">
+              <img src="/static/img/p10.jpg" alt="Kayak equipment" />
+            </div>
+            <div class="swiper-slide gallery-slide">
+              <img src="/static/img/p8.webp" alt="Kayak equipment" />
+            </div>
+            <div class="swiper-slide gallery-slide">
+              <img src="/static/img/last.webp" alt="Kayak equipment" />
+            </div>
+            <div class="swiper-slide gallery-slide">
+              <img src="/static/img/G3.webp" alt="Kayak equipment" />
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="testimonials section">
+      <div class="container">
+        <h2 class="section-title">What Our Guests Say</h2>
+        <div class="swiper testimonials-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-text">
+                  Absolutely stunning! Kayaking through the hidden mangroves was
+                  like stepping into another world—so peaceful and surrounded by
+                  nothing but nature. The guides were super helpful and made
+                  sure we were safe every step of the way. Perfect mix of
+                  adventure and calm!
+                </div>
+                <div class="testimonial-author">
+                  <img
+                    src="/static/img/Aniket_w.jpg"
+                    alt="Ankita PrabhuWalawalkar"
+                    class="author-img"
+                  />
+                  <div class="author-name">Ankita PrabhuWalawalkar</div>
+                  <div class="author-role">
+                    Bigg Boss Marathi 5 #Maharashtraheartedgirl
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-text">
+                  The kayaking trail through the mangroves is just breathtaking.
+                  You feel completely immersed in nature. It's quiet, clean, and
+                  so refreshing. Khavane Kayaks is a hidden gem for nature
+                  lovers and adventure seekers alike!
+                </div>
+                <div class="testimonial-author">
+                  <img
+                    src="/static/img/Mander.jpg"
+                    alt="Mandar Shetye"
+                    class="author-img"
+                  />
+                  <div class="author-name">Mandar Shetye</div>
+                  <div class="author-role">Content Creator-Konkan</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-text">
+                  We chose the sunset slot for kayaking, and wow—what a view!
+                  The sky turned golden and reflected beautifully off the water
+                  while we paddled through mangroves. It was peaceful, surreal,
+                  and honestly one of the best sunsets I've ever experienced.
+                </div>
+                <div class="testimonial-author">
+                  <img
+                    src="/static/img/IMG_0999.png"
+                    alt="Shweeta Sawant"
+                    class="author-img"
+                  />
+                  <div class="author-name">Shweeta Sawant</div>
+                  <div class="author-role">Ayurvedic Doctor,Traveller</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-text">
+                  Went with a group of friends and had a blast! The team at
+                  Khavane Kayaks made everything smooth and fun. The equipment
+                  was top-notch, and the guides were knowledgeable and
+                  enthusiastic. Ideal for group adventures or even corporate
+                  team bonding.
+                </div>
+                <div class="testimonial-author">
+                  <img
+                    src="/static/img/Aniket FB.jpg"
+                    alt="Aniket Darekar"
+                    class="author-img"
+                  />
+                  <div class="author-name">Aniket Darekar</div>
+                  <div class="author-role">Traveler</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-text">
+                  Amazing experience with wonderful nature. They have well
+                  maintained and comfortable kayaks. The quality of the life
+                  jackets is also well maintained. They have life jackets for
+                  kids also. Most important is that river is very calm and
+                  experience in the mangrove forest, makes your ride more fun.
+                  The owner himself looks after his guests and himself guide you
+                  through everything.
+                </div>
+                <div class="testimonial-author">
+                  <img
+                    src="/static/img/Vineet FB.png"
+                    alt="Vineet Tawade"
+                    class="author-img"
+                  />
+                  <div class="author-name">Vineet Tawade</div>
+                  <div class="author-role">Traveler</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-text">
+                  The best kayaking experience till now. The gear is well kept.
+                  It's a long stretch to kayak which adds a lot to the
+                  experience. They do deliver what they show. The experience got
+                  better with the visit to the waterfall. Anybody visiting
+                  malvan, Goa or nearby, must visit this place.
+                </div>
+                <div class="testimonial-author">
+                  <img
+                    src="/static/img/Prajakta FB.png"
+                    alt="Prajakta Pande"
+                    class="author-img"
+                  />
+                  <div class="author-name">Prajakta Pande</div>
+                  <div class="author-role">Travel Blogger</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="pricing-table">
+        <h2 class="section-title">Our Kayaking Packages</h2>
+        <div class="pricing-cards">
+          <div class="pricing-card">
+            <div class="pricing-header">
+              <h4>Kayaking</h4>
+              <div class="price">₹200<span>/person</span></div>
+            </div>
+            <ul class="pricing-features">
+              <li>1-hour guided tour</li>
+              <li>Basic safety equipment</li>
+            </ul>
+            <a href="#booking" class="btn btn-primary">Book Now</a>
+          </div>
+
+          <div class="pricing-card featured">
+            <div class="pricing-header">
+              <h4>Duck Boat</h4>
+              <div class="price">₹200<span>/person</span></div>
+            </div>
+            <ul class="pricing-features">
+              <li>2-hour private tour</li>
+              <li>Basic safety equipment</li>
+            </ul>
+            <a href="#booking" class="btn btn-primary">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+
+    <section id="booking" class="booking section">
+        <h1 class="section-title">Book Your Adventure</h1>
+
+        <form
+          id="bookingForm"
+          class="booking-form"
+          method="POST"
+          action="/book"
+        >
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-control"
+                required
+                aria-required="true"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                required
+                aria-required="true"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                class="form-control"
+                required
+                aria-required="true"
+                pattern="[0-9]{10}"
+                title="Please enter a valid 10-digit phone number"
+              />
+            </div>
+            <div class="form-group">
+              <label for="date">Preferred Date</label>
+              <input
+                type="date"
+                id="date"
+                name="date"
+                class="form-control"
+                required
+                aria-required="true"
+                min="2025-04-05"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="tour">Select Tour</label>
+            <select
+              id="tour"
+              name="tour"
+              class="form-control"
+              required
+              aria-required="true"
+            >
+              <option value="">-- Choose a tour --</option>
+              <option value="mangrove">Kayaking</option>
+              <option value="photography">Duck Boat</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="participants">Number of Participants</label>
+            <input
+              type="number"
+              id="participants"
+              name="participants"
+              class="form-control"
+              min="1"
+              value="1"
+              required
+              aria-required="true"
+            />
+          </div>
+          <div class="form-group">
+            <label for="message">Special Requests</label>
+            <textarea
+              id="message"
+              name="message"
+              class="form-control"
+              rows="4"
+              aria-label="Special requests or additional information"
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%">
+            Confirm Booking
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <div class="map-section">
+      <div class="container map-container">
+        <h3 class="map-title">Find Us</h3>
+        <div class="map-wrapper">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3840.238766044788!2d73.50073807498747!3d15.72790478494241!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc0070003113c5f%3A0x28cf4daaf5114968!2sKhavane%20Kayaks%2C%20Khavaneshwar%20Mandir%20Rd%2C%20Mhapan%2C%20Maharashtra%20416522!5e0!3m2!1sen!2sin!4v1712231234567!5m2!1sen!2sin"
+            class="map-iframe"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            aria-label="Map showing location of Khavane Kayaks"
+          ></iframe>
+        </div>
+        <div class="map-info">
+          <p>
+            <strong>Address:</strong> Khavane Beach Road, Konkan, Maharashtra
+            402108
+          </p>
+          <p><strong>Hours:</strong> Open daily 6:00 AM - 7:00 PM</p>
+          <a
+            href="https://www.google.com/maps/place/Khavane+Kayaks,+Khavaneshwar+Mandir+Rd,+Mhapan,+Maharashtra+416522/data=!4m2!3m1!1s0x3bc0070003113c5f:0x28cf4daaf5114968"
+            target="_blank"
+            class="map-directions"
+            aria-label="Get directions to Khavane Kayaks"
+          >
+            <i class="fas fa-directions"></i> Get Directions
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>Khavane Kayak</h3>
+            <p>
+              Providing unforgettable kayaking experiences in the beautiful
+              Konkan region. Join us for adventure, nature, and memories that
+              last a lifetime.
+            </p>
+            <div class="social-links">
+              <a
+                href="https://www.instagram.com/khavane_kayaks?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                class="social-link"
+                target="_blank"
+                aria-label="Follow us on Instagram"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+            </div>
+          </div>
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#services">Tours</a></li>
+              <li><a href="#gallery">Gallery</a></li>
+              <li><a href="#testimonials">Testimonials</a></li>
+              <li><a href="#booking">Book Now</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Contact Us</h3>
+            <ul class="contact-info">
+              <li>
+                <span class="contact-icon"
+                  ><i class="fas fa-map-marker-alt"></i
+                ></span>
+                <span>Khavane Beach Road, Konkan, Maharashtra 402108</span>
+              </li>
+              <li>
+                <span class="contact-icon"
+                  ><i class="fas fa-phone-alt"></i
+                ></span>
+                <span>+91 9322361033 / 9322253317</span>
+              </li>
+              <li>
+                <span class="contact-icon"
+                  ><i class="fas fa-envelope"></i
+                ></span>
+                <span>khavanekayak@gmail.com</span>
+              </li>
+              <li>
+                <span class="contact-icon"><i class="fas fa-clock"></i></span>
+                <span>Open daily 6:00 AM - 7:00 PM</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            © 2025 Khavane Kayak. All Rights Reserved. | Designed with
+            innovateHive.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script>
+      // Toggle Navigation
+      const navToggle = document.querySelector(".nav-toggle");
+      const navLinks = document.querySelector(".nav-links");
+
+      navToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        navToggle.querySelector("i").classList.toggle("fa-bars");
+        navToggle.querySelector("i").classList.toggle("fa-times");
+      });
+
+      // Initialize Gallery Swiper
+      new Swiper(".gallery-swiper", {
+        loop: true,
+        slidesPerView: 3,
+        spaceBetween: 20,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        breakpoints: {
+          0: {
+            slidesPerView: 1,
+          },
+          768: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
+        },
+      });
+
+      // Initialize Testimonials Swiper
+      new Swiper(".testimonials-swiper", {
+        loop: true,
+        slidesPerView: 1,
+        spaceBetween: 20,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      });
+
+      // Smooth Scrolling for Anchor Links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          if (this.getAttribute("href") === "#") return;
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            window.scrollTo({
+              top: target.offsetTop - 80,
+              behavior: "smooth",
+            });
+            if (navLinks.classList.contains("active")) {
+              navLinks.classList.remove("active");
+              navToggle.querySelector("i").classList.remove("fa-times");
+              navToggle.querySelector("i").classList.add("fa-bars");
+            }
+          }
+        });
+      });
+
+      // Basic Form Validation
+      const bookingForm = document.getElementById("bookingForm");
+      bookingForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const phone = document.getElementById("phone").value;
+        const date = document.getElementById("date").value;
+        const tour = document.getElementById("tour").value;
+        const participants = document.getElementById("participants").value;
+
+        if (phone.length !== 10 || isNaN(phone)) {
+          alert("Please enter a valid 10-digit phone number.");
+          return;
+        }
+
+        if (new Date(date) < new Date("2025-04-05")) {
+          alert("Please select a date on or after April 5, 2025.");
+          return;
+        }
+
+        if (!tour) {
+          alert("Please select a tour.");
+          return;
+        }
+
+        if (tour === "group" && participants < 4) {
+          alert("Group Adventure requires a minimum of 4 participants.");
+          return;
+        }
+
+        alert("Booking submitted successfully! (Demo mode)");
+        // bookingForm.submit(); // Uncomment to actually submit the form
+      });
+    </script>
+  </body>
+</html>
