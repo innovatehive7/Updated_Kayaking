@@ -20,11 +20,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link
-    rel="stylesheet"
-    href="{{ url_for('static', filename='css/styles.css') }}"
-  />
-
+    <link rel="stylesheet" href="static/css/styles.css">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
@@ -48,7 +44,9 @@
     />
     <link rel="manifest" href="/static/img/LOGO_1.png" />
 
+    <style>
     
+    </style>
   </head>
 
   <body>
@@ -426,6 +424,9 @@
         </div>
       </div>
 
+      <a href="https://wa.me/919322361033" class="whatsapp-float" target="_blank" aria-label="Contact us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
 
     <section id="booking" class="booking section">
         <h1 class="section-title">Book Your Adventure</h1>
@@ -735,6 +736,80 @@
 
         alert("Booking submitted successfully! (Demo mode)");
         // bookingForm.submit(); // Uncomment to actually submit the form
+      });
+    </script>
+
+    <script>
+      // WhatsApp button animation and sound
+      document.addEventListener('DOMContentLoaded', function() {
+        const whatsappBtn = document.querySelector('.whatsapp-float');
+      
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = 'whatsapp-notification';
+        notification.textContent = 'Get details directly on your WhatsApp';
+        whatsappBtn.appendChild(notification);
+      
+        // Add bounce animation when page loads
+        setTimeout(() => {
+          whatsappBtn.classList.add('whatsapp-animate');
+          
+          // Play notification sound (optional)
+          const notificationSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3');
+          notificationSound.volume = 0.3;
+          notificationSound.play().catch(e => console.log('Audio play failed:', e));
+        }, 2000);
+      
+        // Add click sound when button is clicked
+        whatsappBtn.addEventListener('click', function() {
+          const clickSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3');
+          clickSound.volume = 0.3;
+          clickSound.play().catch(e => console.log('Audio play failed:', e));
+        });
+      
+        // Show notification every 10 seconds
+        function toggleNotification() {
+          notification.classList.add('show');
+          setTimeout(() => {
+            notification.classList.remove('show');
+          }, 3000); // Show for 3 seconds
+        }
+      
+        // Initial call and then repeat every 10 seconds
+        setTimeout(toggleNotification, 5000); // Start after 5 seconds
+        setInterval(toggleNotification, 10000); // Repeat every 10 seconds
+      
+        // Show tooltip on hover (optional, keeping your original functionality)
+        whatsappBtn.addEventListener('mouseenter', function() {
+          const tooltip = document.createElement('div');
+          tooltip.className = 'whatsapp-tooltip';
+          tooltip.textContent = 'Chat with us on WhatsApp!';
+          tooltip.style.position = 'absolute';
+          tooltip.style.bottom = '70px';
+          tooltip.style.right = '0';
+          tooltip.style.background = '#333';
+          tooltip.style.color = '#fff';
+          tooltip.style.padding = '5px 10px';
+          tooltip.style.borderRadius = '4px';
+          tooltip.style.fontSize = '14px';
+          tooltip.style.whiteSpace = 'nowrap';
+          tooltip.style.opacity = '0';
+          tooltip.style.transition = 'opacity 0.3s';
+          tooltip.style.pointerEvents = 'none';
+      
+          this.appendChild(tooltip);
+      
+          setTimeout(() => {
+            tooltip.style.opacity = '1';
+          }, 10);
+        });
+      
+        whatsappBtn.addEventListener('mouseleave', function() {
+          const tooltip = this.querySelector('.whatsapp-tooltip');
+          if (tooltip) {
+            tooltip.remove();
+          }
+        });
       });
     </script>
   </body>
