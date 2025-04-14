@@ -424,7 +424,7 @@
         </div>
       </div>
 
-      <a href="https://wa.me/919322361033" class="whatsapp-float" target="_blank" aria-label="Contact us on WhatsApp">
+      <a href="https://wa.me/919137083019" class="whatsapp-float" target="_blank" aria-label="Contact us on WhatsApp">
         <i class="fab fa-whatsapp"></i>
       </a>
 
@@ -432,103 +432,107 @@
         <h1 class="section-title">Book Your Adventure</h1>
 
         <form
-          id="bookingForm"
-          class="booking-form"
-          method="POST"
-          action="/book"
-        >
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name">Full Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                class="form-control"
-                required
-                aria-required="true"
-              />
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                class="form-control"
-                required
-                aria-required="true"
-              />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="phone">Phone Number</label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                class="form-control"
-                required
-                aria-required="true"
-                pattern="[0-9]{10}"
-                title="Please enter a valid 10-digit phone number"
-              />
-            </div>
-            <div class="form-group">
-              <label for="date">Preferred Date</label>
-              <input
-                type="date"
-                id="date"
-                name="date"
-                class="form-control"
-                required
-                aria-required="true"
-                min="2025-04-05"
-              />
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="tour">Select Tour</label>
-            <select
-              id="tour"
-              name="tour"
-              class="form-control"
-              required
-              aria-required="true"
-            >
-              <option value="">-- Choose a tour --</option>
-              <option value="mangrove">Kayaking</option>
-              <option value="photography">Duck Boat</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="participants">Number of Participants</label>
-            <input
-              type="number"
-              id="participants"
-              name="participants"
-              class="form-control"
-              min="1"
-              value="1"
-              required
-              aria-required="true"
-            />
-          </div>
-          <div class="form-group">
-            <label for="message">Special Requests</label>
-            <textarea
-              id="message"
-              name="message"
-              class="form-control"
-              rows="4"
-              aria-label="Special requests or additional information"
-            ></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary" style="width: 100%">
-            Confirm Booking
-          </button>
-        </form>
+    id="bookingForm"
+    class="booking-form"
+    method="POST"
+    action="https://docs.google.com/forms/d/e/1FAIpQLSe_1WwyJTXHmIkZXg7ggaf_Ete24td50HSeksejhhW-C-LwUg/formResponse"
+    target="_blank"
+  >
+    <div class="form-row">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input
+          type="text"
+          id="name"
+          name="entry.2005620554"
+          class="form-control"
+          placeholder="Your name"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="entry.1045781291"
+          class="form-control"
+          placeholder="you@example.com"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input
+          type="tel"
+          id="phone"
+          name="entry.1065046570"
+          class="form-control"
+          placeholder="1234567890"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="date">Preferred Date</label>
+        <input
+          type="date"
+          id="date"
+          name="entry.1166974658"
+          class="form-control"
+          required
+          min="2025-04-05"
+        />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="tour">Select Tour</label>
+      <select
+        id="tour"
+        name="entry.839337160"
+        class="form-control"
+        required
+      >
+        <option value="">-- Choose a tour --</option>
+        <option value="Kayaking">Kayaking</option>
+        <option value="Duck Boat">Duck Boat</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="participants">Number of Participants</label>
+      <input
+        type="number"
+        id="participants"
+        name="entry.395628407"
+        class="form-control"
+        min="1"
+        value="1"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="message">Special Requests</label>
+      <textarea
+        id="message"
+        name="entry.1051313161"
+        class="form-control"
+        rows="4"
+        placeholder="Any special requests?"
+      ></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary" style="width: 100%">
+      Confirm Booking
+    </button>
+  </form>
+
+      
+
       </div>
     </section>
 
@@ -608,7 +612,7 @@
                 <span class="contact-icon"
                   ><i class="fas fa-phone-alt"></i
                 ></span>
-                <span>+91 9322361033 / 9322253317</span>
+                <span>+91 9322361033 / 9137083019</span>
               </li>
               <li>
                 <span class="contact-icon"
@@ -707,36 +711,51 @@
 
       // Basic Form Validation
       const bookingForm = document.getElementById("bookingForm");
-      bookingForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const phone = document.getElementById("phone").value;
-        const date = document.getElementById("date").value;
-        const tour = document.getElementById("tour").value;
-        const participants = document.getElementById("participants").value;
 
-        if (phone.length !== 10 || isNaN(phone)) {
-          alert("Please enter a valid 10-digit phone number.");
-          return;
-        }
+bookingForm.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-        if (new Date(date) < new Date("2025-04-05")) {
-          alert("Please select a date on or after April 5, 2025.");
-          return;
-        }
+  const phone = document.getElementById("phone").value;
+  const date = document.getElementById("date").value;
+  const tour = document.getElementById("tour").value;
+  const participants = document.getElementById("participants").value;
 
-        if (!tour) {
-          alert("Please select a tour.");
-          return;
-        }
+  // Validation
+  if (phone.length !== 10 || isNaN(phone)) {
+    alert("Please enter a valid 10-digit phone number.");
+    return;
+  }
 
-        if (tour === "group" && participants < 4) {
-          alert("Group Adventure requires a minimum of 4 participants.");
-          return;
-        }
+  if (new Date(date) < new Date("2025-04-05")) {
+    alert("Please select a date on or after April 5, 2025.");
+    return;
+  }
 
-        alert("Booking submitted successfully! (Demo mode)");
-        // bookingForm.submit(); // Uncomment to actually submit the form
-      });
+  if (!tour) {
+    alert("Please select a tour.");
+    return;
+  }
+
+  if (tour === "group" && participants < 4) {
+    alert("Group Adventure requires a minimum of 4 participants.");
+    return;
+  }
+
+  // Submit to Google Form without redirect
+  const formData = new FormData(bookingForm);
+  fetch("https://docs.google.com/forms/d/e/1FAIpQLSe_1WwyJTXHmIkZXg7ggaf_Ete24td50HSeksejhhW-C-LwUg/formResponse", {
+    method: "POST",
+    mode: "no-cors",
+    body: formData,
+  })
+    .then(() => {
+      alert("Booking submitted successfully!");
+      bookingForm.reset();
+    })
+    .catch(() => {
+      alert("Something went wrong. Please try again.");
+    });
+});
     </script>
 
     <script>
