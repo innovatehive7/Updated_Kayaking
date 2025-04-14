@@ -1,18 +1,18 @@
-from flask import Flask, render_template, request, redirect, url_for
+import requests
 import urllib.parse
+from flask import Flask, render_template, request, redirect, url_for
+from datetime import datetime
 
 app = Flask(__name__)
 
-# Route for the homepage
 @app.route('/')
 def home():
     return render_template('index.html')
 
-# Route to handle booking form submission
 @app.route('/book', methods=['POST'])
 def book():
     if request.method == 'POST':
-        # Get form data
+        # Collect form data
         name = request.form.get('name')
         phone = request.form.get('phone')
         email = request.form.get('email', 'Not provided')
@@ -21,14 +21,31 @@ def book():
         participants = request.form.get('participants')
         message = request.form.get('message', 'None')
 
-        # Format date for display (if provided)
+        # Format date
         if date:
-            from datetime import datetime
             formatted_date = datetime.strptime(date, '%Y-%m-%d').strftime('%d/%m/%Y')
         else:
             formatted_date = 'Not specified'
 
-        # Create WhatsApp message
+        # 1️⃣ Send data to Google Form
+        google_form_url = "https://docs.google.com/forms/d/e/1FAIpQLSe_1WwyJTXHmIkZXg7ggaf_Ete24td50HSeksejhhW-C-LwUg/formResponse"
+
+        form_data = {
+            "entry.2005620554": name,
+            "entry.1045781291": email,
+            "entry.1065046570": phone,
+            "entry.1166974658": date,
+            "entry.839337160": tour,
+            "entry.395628407": participants,
+            "entry.1051313161": message,
+        }
+
+        try:
+            requests.post(google_form_url, data=form_data)
+        except Exception as e:
+            print("Error submitting to Google Form:", e)
+
+        # 2️⃣ Generate WhatsApp message
         whatsapp_message = (
             "New Kayak Booking Request:\n\n"
             f"*Name:* {name}\n"
@@ -40,20 +57,14 @@ def book():
             f"*Special Requests:* {message}"
         )
 
-        # URL encode the message
         encoded_message = urllib.parse.quote(whatsapp_message)
-
-        # Your WhatsApp number
-        whatsapp_number = "919322361033"
-
-        # Construct WhatsApp URL
+        whatsapp_number = "9137083019"
         whatsapp_url = f"https://wa.me/{whatsapp_number}?text={encoded_message}"
 
-        # Redirect to WhatsApp
         return redirect(whatsapp_url)
 
-    # Fallback for GET requests
     return redirect(url_for('home'))
 
 if __name__ == '__main__':
-    app.run(debug=True, host='127.0.0.1', port=5000)
+    app.run(debug=True)
+
