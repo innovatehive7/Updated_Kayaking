@@ -146,6 +146,7 @@ img {
   z-index: 1000;
   height: 80px;
   animation: slideInDown 0.5s ease-in-out;
+  height:60px;
 }
 
 .logo {
@@ -163,7 +164,7 @@ img {
 }
 
 .logo-text {
-  font-size: 28px;
+  font-size: 20px;
   font-weight: bold;
   color: var(--primary-color);
 }
