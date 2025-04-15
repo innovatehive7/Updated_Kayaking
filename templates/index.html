@@ -28,19 +28,19 @@
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="/static/img/LOGO_1.png"
+      href="/static/img/khavanekhayakslogo1.png"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="/static/img/LOGO_1.png"
+      href="/static/img/khavanekhayakslogo1.png"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="/static/img/LOGO_1.png"
+      href="/static/img/khavanekhayakslogo1.png"
     />
     <link rel="manifest" href="/static/img/LOGO_1.png" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -92,7 +92,7 @@
     <nav class="navbar" role="navigation">
       <a href="#" class="logo" aria-label="Khavane Kayak Home">
         <img
-          src="/static/img/LOGO_9.png"
+          src="/static/img/khavanekhayakslogo1.png"
           alt="Khavane Kayak Logo"
           class="logo-img"
         />
@@ -455,14 +455,25 @@
         </div>
       </div>
 
-      <a
-        href="https://wa.me/919137083019"
-        class="whatsapp-float"
-        target="_blank"
-        aria-label="Contact us on WhatsApp"
-      >
-        <i class="fab fa-whatsapp"></i>
-      </a>
+      <!-- Social Media Float Buttons -->
+<div class="social-float">
+  <a
+    href="https://www.instagram.com/khavane_kayaks?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+    class="instagram-float"
+    target="_blank"
+    aria-label="Follow us on Instagram"
+  >
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a
+    href="https://wa.me/919137083019"
+    class="whatsapp-float"
+    target="_blank"
+    aria-label="Contact us on WhatsApp"
+  >
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</div>
 
       <section id="booking" class="booking section">
         <h1 class="section-title">Book Your Adventure</h1>
@@ -923,85 +934,109 @@
       </script>
 
       <script>
-        // WhatsApp button animation and sound
-        document.addEventListener("DOMContentLoaded", function () {
-          const whatsappBtn = document.querySelector(".whatsapp-float");
+// WhatsApp and Instagram button animation and sound
+document.addEventListener("DOMContentLoaded", function () {
+  const whatsappBtn = document.querySelector(".whatsapp-float");
+  const instagramBtn = document.querySelector(".instagram-float");
 
-          // Create notification element
-          const notification = document.createElement("div");
-          notification.className = "whatsapp-notification";
-          notification.textContent = "Get details directly on your WhatsApp";
-          whatsappBtn.appendChild(notification);
+  // Create notification elements
+  const whatsappNotification = document.createElement("div");
+  whatsappNotification.className = "whatsapp-notification";
+  whatsappNotification.textContent = "Chat with us on WhatsApp!";
+  whatsappBtn.appendChild(whatsappNotification);
 
-          // Add bounce animation when page loads
-          setTimeout(() => {
-            whatsappBtn.classList.add("whatsapp-animate");
+  const instagramNotification = document.createElement("div");
+  instagramNotification.className = "instagram-notification";
+  instagramNotification.textContent = "Follow us on Instagram!";
+  instagramBtn.appendChild(instagramNotification);
 
-            // Play notification sound (optional)
-            const notificationSound = new Audio(
-              "https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3"
-            );
-            notificationSound.volume = 0.3;
-            notificationSound.play().catch((e) =>
-              console.log("Audio play failed:", e)
-            );
-          }, 2000);
+  // Add bounce animation when page loads
+  setTimeout(() => {
+    whatsappBtn.classList.add("whatsapp-animate");
+    
+    // Play notification sound (optional)
+    const notificationSound = new Audio(
+      "https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3"
+    );
+    notificationSound.volume = 0.3;
+    notificationSound.play().catch((e) =>
+      console.log("Audio play failed:", e)
+    );
+  }, 2000);
 
-          // Add click sound when button is clicked
-          whatsappBtn.addEventListener("click", function () {
-            const clickSound = new Audio(
-              "https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3"
-            );
-            clickSound.volume = 0.3;
-            clickSound.play().catch((e) =>
-              console.log("Audio play failed:", e)
-            );
-          });
+  // Add click sound when buttons are clicked
+  whatsappBtn.addEventListener("click", function () {
+    const clickSound = new Audio(
+      "https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3"
+    );
+    clickSound.volume = 0.3;
+    clickSound.play().catch((e) =>
+      console.log("Audio play failed:", e)
+    );
+  });
 
-          // Show notification every 10 seconds
-          function toggleNotification() {
-            notification.classList.add("show");
-            setTimeout(() => {
-              notification.classList.remove("show");
-            }, 3000); // Show for 3 seconds
-          }
+  instagramBtn.addEventListener("click", function () {
+    const clickSound = new Audio(
+      "https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3"
+    );
+    clickSound.volume = 0.3;
+    clickSound.play().catch((e) =>
+      console.log("Audio play failed:", e)
+    );
+  });
 
-          // Initial call and then repeat every 10 seconds
-          setTimeout(toggleNotification, 5000); // Start after 5 seconds
-          setInterval(toggleNotification, 10000); // Repeat every 10 seconds
+  // Show notifications alternately
+  function toggleNotifications() {
+    whatsappNotification.classList.toggle("show");
+    setTimeout(() => {
+      whatsappNotification.classList.toggle("show");
+      instagramNotification.classList.toggle("show");
+      setTimeout(() => {
+        instagramNotification.classList.toggle("show");
+      }, 3000);
+    }, 3000);
+  }
 
-          // Show tooltip on hover
-          whatsappBtn.addEventListener("mouseenter", function () {
-            const tooltip = document.createElement("div");
-            tooltip.className = "whatsapp-tooltip";
-            tooltip.textContent = "Chat with us on WhatsApp!";
-            tooltip.style.position = "absolute";
-            tooltip.style.bottom = "70px";
-            tooltip.style.right = "0";
-            tooltip.style.background = "#333";
-            tooltip.style.color = "#fff";
-            tooltip.style.padding = "5px 10px";
-            tooltip.style.borderRadius = "4px";
-            tooltip.style.fontSize = "14px";
-            tooltip.style.whiteSpace = "nowrap";
-            tooltip.style.opacity = "0";
-            tooltip.style.transition = "opacity 0.3s";
-            tooltip.style.pointerEvents = "none";
+  // Initial call and then repeat every 10 seconds
+  setTimeout(toggleNotifications, 5000);
+  setInterval(toggleNotifications, 10000);
 
-            this.appendChild(tooltip);
+  // Show tooltips on hover
+  [whatsappBtn, instagramBtn].forEach(btn => {
+    btn.addEventListener("mouseenter", function () {
+      const tooltip = document.createElement("div");
+      tooltip.className = "whatsapp-tooltip";
+      tooltip.textContent = this.classList.contains("whatsapp-float") 
+        ? "Chat with us on WhatsApp!" 
+        : "Follow us on Instagram!";
+      tooltip.style.position = "absolute";
+      tooltip.style.bottom = "70px";
+      tooltip.style.right = "0";
+      tooltip.style.background = "#333";
+      tooltip.style.color = "#fff";
+      tooltip.style.padding = "5px 10px";
+      tooltip.style.borderRadius = "4px";
+      tooltip.style.fontSize = "14px";
+      tooltip.style.whiteSpace = "nowrap";
+      tooltip.style.opacity = "0";
+      tooltip.style.transition = "opacity 0.3s";
+      tooltip.style.pointerEvents = "none";
 
-            setTimeout(() => {
-              tooltip.style.opacity = "1";
-            }, 10);
-          });
+      this.appendChild(tooltip);
 
-          whatsappBtn.addEventListener("mouseleave", function () {
-            const tooltip = this.querySelector(".whatsapp-tooltip");
-            if (tooltip) {
-              tooltip.remove();
-            }
-          });
-        });
+      setTimeout(() => {
+        tooltip.style.opacity = "1";
+      }, 10);
+    });
+
+    btn.addEventListener("mouseleave", function () {
+      const tooltip = this.querySelector(".whatsapp-tooltip");
+      if (tooltip) {
+        tooltip.remove();
+      }
+    });
+  });
+});
       </script>
     </body>
 </html>
