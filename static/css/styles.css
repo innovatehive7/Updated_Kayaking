@@ -21,7 +21,6 @@ body {
   color: var(--text-dark);
   line-height: 1.6;
   overflow-x: hidden;
-  margin: 0;
 }
 
 h1,
@@ -132,7 +131,6 @@ img {
   color: var(--primary-color);
 }
 
-/* Navbar Styles with Logo */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -144,24 +142,23 @@ img {
   width: 100%;
   top: 0;
   z-index: 1000;
-  height: 80px;
-  animation: slideInDown 0.5s ease-in-out;
   height: 60px;
+  animation: slideInDown 0.5s ease-in-out;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 8px; /* Added gap for spacing between image and text */
+  gap: 8px;
   height: 100%;
 }
 
 .logo-img {
-  height: 80px; /* Reduced for better balance */
+  height: 50px;
   width: auto;
   object-fit: contain;
   transition: var(--transition);
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .logo-text {
@@ -203,7 +200,6 @@ img {
   transform: scale(1.05);
 }
 
-/* Toggle Button Styles */
 .nav-toggle {
   display: none;
   font-size: 24px;
@@ -215,7 +211,8 @@ img {
 }
 
 .hero {
-  height: 100vh;
+  min-height: 70vh;
+  max-height: 100vh;
   background-image: url("/static/img/hero.webp");
   background-size: cover;
   background-position: center;
@@ -584,10 +581,6 @@ img {
   flex: 1;
 }
 
-.container {
-  margin-top: 50px;
-}
-
 .pricing-table {
   margin-bottom: 40px;
   text-align: center;
@@ -675,13 +668,12 @@ img {
   padding: 12px;
 }
 
-/* Updated Footer Styles */
 footer {
   background-color: var(--primary-color);
   color: var(--text-light);
   padding: 60px 0 20px;
-  width: 100vw; /* Full viewport width */
-  margin: 0; /* Remove any margins */
+  width: 100vw;
+  margin: 0;
   position: relative;
   left: 50%;
   right: 50%;
@@ -845,90 +837,6 @@ footer {
   color: var(--primary-color);
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes zoomIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes slideInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-  }
-}
-
-@keyframes bounce {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-20px);
-  }
-  60% {
-    transform: translateY(-10px);
-  }
-}
-
-/* Enhanced WhatsApp floating button with animation */
-/* Social Media Float Buttons */
 .social-float {
   position: fixed;
   bottom: 30px;
@@ -944,8 +852,8 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   color: white;
   font-size: 30px;
@@ -975,9 +883,12 @@ footer {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Animation for the buttons */
 .whatsapp-animate {
   animation: whatsapp-bounce 2s infinite;
+}
+
+.instagram-animate {
+  animation: instagram-bounce 2s infinite;
 }
 
 @keyframes whatsapp-bounce {
@@ -996,7 +907,22 @@ footer {
   }
 }
 
-/* Notification tooltip */
+@keyframes instagram-bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
 .whatsapp-notification,
 .instagram-notification {
   position: absolute;
@@ -1019,7 +945,6 @@ footer {
   opacity: 1;
 }
 
-/* Responsive Media Queries */
 @media (max-width: 1200px) {
   .container {
     padding: 0 15px;
@@ -1037,7 +962,7 @@ footer {
 
 @media (max-width: 992px) {
   .logo-img {
-    height: 50px; /* Adjusted for proportionality */
+    height: 50px;
   }
   .logo-text {
     font-size: 24px;
@@ -1090,7 +1015,7 @@ footer {
     justify-content: flex-start;
   }
   .logo-img {
-    height: 40px; /* Smaller for mobile */
+    height: 40px;
   }
   .logo-text {
     font-size: 20px;
@@ -1105,7 +1030,7 @@ footer {
     padding: 10px 0;
     background-color: #ffffff;
     position: absolute;
-    top: 70px; /* Adjusted for smaller navbar */
+    top: 70px;
     left: 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
@@ -1135,7 +1060,8 @@ footer {
 
   .hero {
     padding-top: 80px;
-    height: 80vh;
+    min-height: 70vh;
+    max-height: 80vh;
   }
 
   .hero-content {
@@ -1208,7 +1134,8 @@ footer {
   .whatsapp-float {
     width: 50px;
     height: 50px;
-    bottom: 6px;
+    bottom: 20px;
+    right: 20px;
     font-size: 25px;
   }
 }
@@ -1219,7 +1146,7 @@ footer {
   }
 
   .logo-img {
-    height: 36px; /* Compact for small screens */
+    height: 36px;
   }
   .logo-text {
     font-size: 18px;
@@ -1242,7 +1169,8 @@ footer {
   }
 
   .hero {
-    height: 70vh;
+    min-height: 60vh;
+    max-height: 70vh;
   }
 
   .hero-content h1 {
@@ -1356,4 +1284,69 @@ footer {
 .swiper-pagination-bullets,
 .swiper-pagination-bullets.swiper-pagination-horizontal {
   bottom: -6px !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
 }
