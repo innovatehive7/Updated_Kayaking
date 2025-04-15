@@ -944,8 +944,8 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   color: white;
   font-size: 30px;
@@ -1208,8 +1208,7 @@ footer {
   .whatsapp-float {
     width: 50px;
     height: 50px;
-    bottom: 20px;
-    right: 20px;
+    bottom: 6px;
     font-size: 25px;
   }
 }
