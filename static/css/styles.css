@@ -146,7 +146,7 @@ img {
   z-index: 1000;
   height: 80px;
   animation: slideInDown 0.5s ease-in-out;
-  height:60px;
+  height: 60px;
 }
 
 .logo {
@@ -674,10 +674,18 @@ img {
   padding: 12px;
 }
 
+/* Updated Footer Styles */
 footer {
   background-color: var(--primary-color);
   color: var(--text-light);
   padding: 60px 0 20px;
+  width: 100vw; /* Full viewport width */
+  margin: 0; /* Remove any margins */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 
 .footer-content {
@@ -765,6 +773,7 @@ footer {
   text-align: center;
   padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
 }
 
 .map-section {
