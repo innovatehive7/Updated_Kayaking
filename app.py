@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, redirect, url_for, make_respo
 from datetime import datetime
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import (
-    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image
+    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image, Flowable
 )
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
@@ -29,6 +29,19 @@ def get_next_booking_number():
             f.truncate()
         return next_number
 
+# Custom Flowable for top-right timestamp
+class TopRightText(Flowable):
+    def __init__(self, text, style):
+        Flowable.__init__(self)
+        self.text = Paragraph(text, style)
+    
+    def wrap(self, availWidth, availHeight):
+        return self.text.wrap(availWidth, availHeight)
+
+    def draw(self):
+        w, h = self.text.wrap(self.canv._pagesize[0], self.canv._pagesize[1])
+        self.text.drawOn(self.canv, self.canv._pagesize[0] - w - 40, self.canv._pagesize[1] - 40)
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -51,15 +64,18 @@ def book():
         else:
             formatted_date = 'Not specified'
 
-        # Get next booking number
+        # Get booking number
         booking_number = get_next_booking_number()
+
+        # Get current submission timestamp
+        submission_time = datetime.now().strftime("Submitted on: %d/%m/%Y at %I:%M %p")
 
         # Create PDF
         buffer = BytesIO()
         doc = SimpleDocTemplate(buffer, pagesize=letter, leftMargin=36, rightMargin=36, topMargin=36, bottomMargin=36)
         styles = getSampleStyleSheet()
 
-        # Custom styles
+        # Define custom styles
         title_style = ParagraphStyle(
             'Title',
             parent=styles['Title'],
@@ -82,32 +98,34 @@ def book():
             fontSize=12,
             spaceAfter=8
         )
+        timestamp_style = ParagraphStyle(
+            'Time',
+            parent=styles['Normal'],
+            fontSize=10,
+            textColor=colors.grey,
+            alignment=2  # right align
+        )
 
         content = []
 
-        # Add logo
-        logo_path = os.path.join('static', 'img', 'LOGO_1.png')
+        # Add timestamp to top-right corner
+        content.append(TopRightText(submission_time, timestamp_style))
+
+        # Add logo image
+        logo_path = os.path.join('static', 'LOGO_1.png')
         if os.path.exists(logo_path):
             logo = Image(logo_path, width=150, height=75)
             logo.hAlign = 'CENTER'
             content.append(logo)
             content.append(Spacer(1, 12))
 
-        # Add date-time of submission (top-right)
-        submitted_datetime = datetime.now().strftime('%d/%m/%Y %I:%M %p')
-        content.append(Paragraph(
-            f"<para alignment='right'><font size=10 color='gray'>Submitted on: {submitted_datetime}</font></para>",
-            styles['Normal']
-        ))
-        content.append(Spacer(1, 6))
-
         # Add title and booking number
-        content.append(Paragraph("Kayak Booking Confirmation 🛶", title_style))
+        content.append(Paragraph("Kayak Booking Confirmation🛶", title_style))
         content.append(Spacer(1, 6))
         content.append(Paragraph(f"<b>Booking Number:</b> #{booking_number:04}", value_style))
         content.append(Spacer(1, 18))
 
-        # Table data
+        # Create table data
         table_data = [
             [Paragraph("Name:", label_style), Paragraph(name, value_style)],
             [Paragraph("Phone:", label_style), Paragraph(phone, value_style)],
@@ -118,6 +136,7 @@ def book():
             [Paragraph("Special Requests:", label_style), Paragraph(message, value_style)]
         ]
 
+        # Create table
         table = Table(table_data, colWidths=[150, 350])
         table.setStyle(TableStyle([
             ('VALIGN', (0, 0), (-1, -1), 'TOP'),
@@ -134,14 +153,15 @@ def book():
 
         # Build PDF
         doc.build(content)
+
+        # Send PDF as response
         pdf_data = buffer.getvalue()
         buffer.close()
 
-        # Return PDF as response
         response = make_response(pdf_data)
         response.headers['Content-Type'] = 'application/pdf'
         response.headers['Content-Disposition'] = f'attachment; filename=booking_confirmation_{name}.pdf'
-        
+
         return response
 
     return redirect(url_for('home'))
