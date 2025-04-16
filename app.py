@@ -1,25 +1,29 @@
-import requests
-import urllib.parse
+import os
 from flask import Flask, render_template, request, redirect, url_for, make_response
 from datetime import datetime
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import (
-    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image, Flowable
-)
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 from io import BytesIO
-import os
 
 app = Flask(__name__)
 
-# Function to get next booking number
-def get_next_booking_number():
+# Booking counter logic with reset option
+def get_next_booking_number(reset=False):
     file_path = 'booking_counter.txt'
+    
+    # If reset is True, reset the counter to 1
+    if reset:
+        with open(file_path, 'w') as f:
+            f.write('1')
+        return 'KK1'
+    
+    # Otherwise, continue incrementing the counter
     if not os.path.exists(file_path):
         with open(file_path, 'w') as f:
             f.write('1')
-        return 1
+        return 'KK1'
     else:
         with open(file_path, 'r+') as f:
             current = int(f.read().strip())
@@ -27,20 +31,7 @@ def get_next_booking_number():
             f.seek(0)
             f.write(str(next_number))
             f.truncate()
-        return next_number
-
-# Custom Flowable for top-right timestamp
-class TopRightText(Flowable):
-    def __init__(self, text, style):
-        Flowable.__init__(self)
-        self.text = Paragraph(text, style)
-    
-    def wrap(self, availWidth, availHeight):
-        return self.text.wrap(availWidth, availHeight)
-
-    def draw(self):
-        w, h = self.text.wrap(self.canv._pagesize[0], self.canv._pagesize[1])
-        self.text.drawOn(self.canv, self.canv._pagesize[0] - w - 40, self.canv._pagesize[1] - 40)
+        return f'KK{next_number}'
 
 @app.route('/')
 def home():
@@ -49,7 +40,6 @@ def home():
 @app.route('/book', methods=['POST'])
 def book():
     if request.method == 'POST':
-        # Collect form data
         name = request.form.get('entry.2005620554')
         phone = request.form.get('entry.1065046570')
         email = request.form.get('entry.1045781291', 'Not provided')
@@ -58,30 +48,22 @@ def book():
         participants = request.form.get('entry.395628407')
         message = request.form.get('entry.1051313161', 'None')
 
-        # Format date
-        if date:
-            formatted_date = datetime.strptime(date, '%Y-%m-%d').strftime('%d/%m/%Y')
-        else:
-            formatted_date = 'Not specified'
-
-        # Get booking number
+        formatted_date = datetime.strptime(date, '%Y-%m-%d').strftime('%d/%m/%Y') if date else 'Not specified'
+        
+        # Fetch the next booking number, now it will start from KK1 after reset
         booking_number = get_next_booking_number()
 
-        # Get current submission timestamp
-        submission_time = datetime.now().strftime("Submitted on: %d/%m/%Y at %I:%M %p")
-
-        # Create PDF
         buffer = BytesIO()
         doc = SimpleDocTemplate(buffer, pagesize=letter, leftMargin=36, rightMargin=36, topMargin=36, bottomMargin=36)
         styles = getSampleStyleSheet()
 
-        # Define custom styles
+        # Custom styles
         title_style = ParagraphStyle(
             'Title',
             parent=styles['Title'],
             fontSize=22,
-            spaceAfter=20,
             alignment=1,
+            spaceAfter=20,
             textColor=colors.darkblue
         )
         label_style = ParagraphStyle(
@@ -89,8 +71,7 @@ def book():
             parent=styles['Normal'],
             fontSize=12,
             fontName='Helvetica-Bold',
-            spaceAfter=8,
-            textColor=colors.black
+            spaceAfter=8
         )
         value_style = ParagraphStyle(
             'Value',
@@ -98,34 +79,24 @@ def book():
             fontSize=12,
             spaceAfter=8
         )
-        timestamp_style = ParagraphStyle(
-            'Time',
-            parent=styles['Normal'],
-            fontSize=10,
-            textColor=colors.grey,
-            alignment=2  # right align
-        )
 
         content = []
 
-        # Add timestamp to top-right corner
-        content.append(TopRightText(submission_time, timestamp_style))
-
-        # Add logo image
-        logo_path = os.path.join('static', 'LOGO_1.png')
+        # Add logo
+        logo_path = os.path.join('static', 'img', 'LOGO_1.png')
         if os.path.exists(logo_path):
-            logo = Image(logo_path, width=150, height=75)
+            logo = Image(logo_path, width=170, height=85)
             logo.hAlign = 'CENTER'
             content.append(logo)
-            content.append(Spacer(1, 12))
+            content.append(Spacer(1, 14))
 
-        # Add title and booking number
+        # Title and booking number
         content.append(Paragraph("Kayak Booking Confirmation🛶", title_style))
         content.append(Spacer(1, 6))
-        content.append(Paragraph(f"<b>Booking Number:</b> #{booking_number:04}", value_style))
+        content.append(Paragraph(f"<b>Booking Number:</b> {booking_number}", value_style))
         content.append(Spacer(1, 18))
 
-        # Create table data
+        # Booking info table
         table_data = [
             [Paragraph("Name:", label_style), Paragraph(name, value_style)],
             [Paragraph("Phone:", label_style), Paragraph(phone, value_style)],
@@ -135,8 +106,6 @@ def book():
             [Paragraph("Participants:", label_style), Paragraph(participants, value_style)],
             [Paragraph("Special Requests:", label_style), Paragraph(message, value_style)]
         ]
-
-        # Create table
         table = Table(table_data, colWidths=[150, 350])
         table.setStyle(TableStyle([
             ('VALIGN', (0, 0), (-1, -1), 'TOP'),
@@ -148,13 +117,20 @@ def book():
             ('BACKGROUND', (0, 0), (0, -1), colors.lightblue),
             ('TEXTCOLOR', (0, 0), (-1, -1), colors.darkblue),
         ]))
-
         content.append(table)
 
-        # Build PDF
-        doc.build(content)
+        # Top-right timestamp
+        def draw_top_right(canvas, doc):
+            canvas.saveState()
+            canvas.setFont("Helvetica-Bold", 10)
+            canvas.setFillColor(colors.black)
+            timestamp = f"Submitted on: {datetime.now().strftime('%d/%m/%Y at %I:%M %p')}"
+            text_width = canvas.stringWidth(timestamp, "Helvetica-Bold", 10)
+            canvas.drawString(doc.pagesize[0] - text_width - 40, doc.pagesize[1] - 40, timestamp)
+            canvas.restoreState()
 
-        # Send PDF as response
+        doc.build(content, onFirstPage=draw_top_right)
+
         pdf_data = buffer.getvalue()
         buffer.close()
 
@@ -165,6 +141,12 @@ def book():
         return response
 
     return redirect(url_for('home'))
+
+@app.route('/reset_booking_number', methods=['GET'])
+def reset_booking_number():
+    # Reset the booking number to KK1
+    get_next_booking_number(reset=True)
+    return "Booking counter has been reset to KK1."
 
 if __name__ == '__main__':
     app.run(debug=True)
