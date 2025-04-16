@@ -94,7 +94,7 @@ def book():
             content.append(Spacer(1, 12))
 
         # Add title and booking number
-        content.append(Paragraph("Kayak Booking Confirmation", title_style))
+        content.append(Paragraph("Kayak Booking Confirmation🛶", title_style))
         content.append(Spacer(1, 6))
         content.append(Paragraph(f"<b>Booking Number:</b> #{booking_number:04}", value_style))  # 4-digit format like #0001
         content.append(Spacer(1, 18))
