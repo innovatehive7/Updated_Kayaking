@@ -3,8 +3,9 @@ import urllib.parse
 from flask import Flask, render_template, request, redirect, url_for, make_response
 from datetime import datetime
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
-from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib import colors
 from io import BytesIO
 
 app = Flask(__name__)
@@ -33,21 +34,62 @@ def book():
 
         # Create PDF
         buffer = BytesIO()
-        doc = SimpleDocTemplate(buffer, pagesize=letter)
+        doc = SimpleDocTemplate(buffer, pagesize=letter, leftMargin=36, rightMargin=36, topMargin=36, bottomMargin=36)
         styles = getSampleStyleSheet()
+
+        # Define custom styles
+        title_style = ParagraphStyle(
+            'Title',
+            parent=styles['Title'],
+            fontSize=18,
+            spaceAfter=20,
+            alignment=1  # Center
+        )
+        label_style = ParagraphStyle(
+            'Label',
+            parent=styles['Normal'],
+            fontSize=12,
+            fontName='Helvetica-Bold',
+            spaceAfter=8
+        )
+        value_style = ParagraphStyle(
+            'Value',
+            parent=styles['Normal'],
+            fontSize=12,
+            spaceAfter=8
+        )
+
         content = []
 
-        # Add content to PDF
-        content.append(Paragraph("Kayak Booking Confirmation", styles['Title']))
-        content.append(Spacer(1, 12))
-        content.append(Paragraph(f"Name: {name}", styles['Normal']))
-        content.append(Paragraph(f"Phone: {phone}", styles['Normal']))
-        content.append(Paragraph(f"Email: {email}", styles['Normal']))
-        content.append(Paragraph(f"Tour: {tour}", styles['Normal']))
-        content.append(Paragraph(f"Date: {formatted_date}", styles['Normal']))
-        content.append(Paragraph(f"Participants: {participants}", styles['Normal']))
-        content.append(Paragraph(f"Special Requests: {message}", styles['Normal']))
+        # Add title
+        content.append(Paragraph("Kayak Booking Confirmation", title_style))
+        content.append(Spacer(1, 24))
 
+        # Create table data for columnar layout
+        table_data = [
+            [Paragraph("Name:", label_style), Paragraph(name, value_style)],
+            [Paragraph("Phone:", label_style), Paragraph(phone, value_style)],
+            [Paragraph("Email:", label_style), Paragraph(email, value_style)],
+            [Paragraph("Tour:", label_style), Paragraph(tour, value_style)],
+            [Paragraph("Date:", label_style), Paragraph(formatted_date, value_style)],
+            [Paragraph("Participants:", label_style), Paragraph(participants, value_style)],
+            [Paragraph("Special Requests:", label_style), Paragraph(message, value_style)]
+        ]
+
+        # Create table
+        table = Table(table_data, colWidths=[150, 350])
+        table.setStyle(TableStyle([
+            ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+            ('LEFTPADDING', (0, 0), (-1, -1), 6),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 6),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
+            ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
+            ('BACKGROUND', (0, 0), (0, -1), colors.lightgrey)
+        ]))
+
+        content.append(table)
+
+        # Build PDF
         doc.build(content)
         
         # Get PDF data from buffer
