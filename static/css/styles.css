@@ -149,16 +149,16 @@ img {
 .logo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: -10px;
   height: 100%;
 }
 
 .logo-img {
-  height: 70px;
+  height: 90px;
   width: auto;
   object-fit: contain;
   transition: var(--transition);
-  margin-top: 5px;
+  margin-top: 21px;
 }
 
 .logo-text {
