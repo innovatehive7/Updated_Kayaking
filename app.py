@@ -59,13 +59,13 @@ def book():
         doc = SimpleDocTemplate(buffer, pagesize=letter, leftMargin=36, rightMargin=36, topMargin=36, bottomMargin=36)
         styles = getSampleStyleSheet()
 
-        # Define custom styles
+        # Custom styles
         title_style = ParagraphStyle(
             'Title',
             parent=styles['Title'],
             fontSize=22,
             spaceAfter=20,
-            alignment=1,  # Center
+            alignment=1,
             textColor=colors.darkblue
         )
         label_style = ParagraphStyle(
@@ -85,21 +85,29 @@ def book():
 
         content = []
 
-        # Add logo image
-        logo_path = os.path.join('static', 'LOGO_1.png')
+        # Add logo
+        logo_path = os.path.join('static', 'img', 'LOGO_1.png')
         if os.path.exists(logo_path):
             logo = Image(logo_path, width=150, height=75)
             logo.hAlign = 'CENTER'
             content.append(logo)
             content.append(Spacer(1, 12))
 
-        # Add title and booking number
-        content.append(Paragraph("Kayak Booking Confirmation🛶", title_style))
+        # Add date-time of submission (top-right)
+        submitted_datetime = datetime.now().strftime('%d/%m/%Y %I:%M %p')
+        content.append(Paragraph(
+            f"<para alignment='right'><font size=10 color='gray'>Submitted on: {submitted_datetime}</font></para>",
+            styles['Normal']
+        ))
         content.append(Spacer(1, 6))
-        content.append(Paragraph(f"<b>Booking Number:</b> #{booking_number:04}", value_style))  # 4-digit format like #0001
+
+        # Add title and booking number
+        content.append(Paragraph("Kayak Booking Confirmation 🛶", title_style))
+        content.append(Spacer(1, 6))
+        content.append(Paragraph(f"<b>Booking Number:</b> #{booking_number:04}", value_style))
         content.append(Spacer(1, 18))
 
-        # Create table data
+        # Table data
         table_data = [
             [Paragraph("Name:", label_style), Paragraph(name, value_style)],
             [Paragraph("Phone:", label_style), Paragraph(phone, value_style)],
@@ -110,7 +118,6 @@ def book():
             [Paragraph("Special Requests:", label_style), Paragraph(message, value_style)]
         ]
 
-        # Create table
         table = Table(table_data, colWidths=[150, 350])
         table.setStyle(TableStyle([
             ('VALIGN', (0, 0), (-1, -1), 'TOP'),
@@ -127,12 +134,10 @@ def book():
 
         # Build PDF
         doc.build(content)
-        
-        # Get PDF data from buffer
         pdf_data = buffer.getvalue()
         buffer.close()
 
-        # Create response with PDF
+        # Return PDF as response
         response = make_response(pdf_data)
         response.headers['Content-Type'] = 'application/pdf'
         response.headers['Content-Disposition'] = f'attachment; filename=booking_confirmation_{name}.pdf'
