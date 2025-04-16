@@ -9,30 +9,6 @@ from io import BytesIO
 
 app = Flask(__name__)
 
-# Booking counter logic with reset option
-def get_next_booking_number(reset=False):
-    file_path = 'booking_counter.txt'
-    
-    # If reset is True, reset the counter to 1
-    if reset:
-        with open(file_path, 'w') as f:
-            f.write('1')
-        return 'KK1'
-    
-    # Otherwise, continue incrementing the counter
-    if not os.path.exists(file_path):
-        with open(file_path, 'w') as f:
-            f.write('1')
-        return 'KK1'
-    else:
-        with open(file_path, 'r+') as f:
-            current = int(f.read().strip())
-            next_number = current + 1
-            f.seek(0)
-            f.write(str(next_number))
-            f.truncate()
-        return f'KK{next_number}'
-
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -49,15 +25,14 @@ def book():
         message = request.form.get('entry.1051313161', 'None')
 
         formatted_date = datetime.strptime(date, '%Y-%m-%d').strftime('%d/%m/%Y') if date else 'Not specified'
-        
-        # Fetch the next booking number, now it will start from KK1 after reset
-        booking_number = get_next_booking_number()
+
+        # Generate booking number based on timestamp
+        booking_number = f"KK{datetime.now().strftime('%Y%m%d%H%M%S')}"
 
         buffer = BytesIO()
         doc = SimpleDocTemplate(buffer, pagesize=letter, leftMargin=36, rightMargin=36, topMargin=36, bottomMargin=36)
         styles = getSampleStyleSheet()
 
-        # Custom styles
         title_style = ParagraphStyle(
             'Title',
             parent=styles['Title'],
@@ -82,7 +57,6 @@ def book():
 
         content = []
 
-        # Add logo
         logo_path = os.path.join('static', 'img', 'LOGO_1.png')
         if os.path.exists(logo_path):
             logo = Image(logo_path, width=170, height=85)
@@ -90,13 +64,11 @@ def book():
             content.append(logo)
             content.append(Spacer(1, 14))
 
-        # Title and booking number
         content.append(Paragraph("Kayak Booking Confirmation🛶", title_style))
         content.append(Spacer(1, 6))
         content.append(Paragraph(f"<b>Booking Number:</b> {booking_number}", value_style))
         content.append(Spacer(1, 18))
 
-        # Booking info table
         table_data = [
             [Paragraph("Name:", label_style), Paragraph(name, value_style)],
             [Paragraph("Phone:", label_style), Paragraph(phone, value_style)],
@@ -119,7 +91,6 @@ def book():
         ]))
         content.append(table)
 
-        # Top-right timestamp
         def draw_top_right(canvas, doc):
             canvas.saveState()
             canvas.setFont("Helvetica-Bold", 10)
@@ -141,12 +112,6 @@ def book():
         return response
 
     return redirect(url_for('home'))
-
-@app.route('/reset_booking_number', methods=['GET'])
-def reset_booking_number():
-    # Reset the booking number to KK1
-    get_next_booking_number(reset=True)
-    return "Booking counter has been reset to KK1."
 
 if __name__ == '__main__':
     app.run(debug=True)
