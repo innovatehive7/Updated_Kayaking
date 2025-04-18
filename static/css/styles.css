@@ -1,3 +1,4 @@
+/* Root Variables */
 :root {
   --primary-color: #1a3c34;
   --secondary-color: #e67e22;
@@ -10,12 +11,14 @@
   --transition: all 0.3s ease;
 }
 
+/* Global Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Body Styles */
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: var(--text-dark);
@@ -23,6 +26,7 @@ body {
   overflow-x: hidden;
 }
 
+/* Headings */
 h1,
 h2,
 h3,
@@ -32,21 +36,25 @@ h4 {
   margin-bottom: 1rem;
 }
 
+/* Paragraphs */
 p {
   margin-bottom: 1.25rem;
 }
 
+/* Links */
 a {
   text-decoration: none;
   color: inherit;
 }
 
+/* Images */
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
+/* Container */
 .container {
   width: 100%;
   max-width: 1200px;
@@ -54,10 +62,12 @@ img {
   padding: 0 20px;
 }
 
+/* Section */
 .section {
   padding: 80px 0;
 }
 
+/* Section Title */
 .section-title {
   font-size: 2.5rem;
   text-align: center;
@@ -78,6 +88,7 @@ img {
   background-color: var(--secondary-color);
 }
 
+/* Buttons */
 .btn {
   display: inline-block;
   padding: 12px 30px;
@@ -131,6 +142,7 @@ img {
   color: var(--primary-color);
 }
 
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -210,8 +222,9 @@ img {
   padding: 10px;
 }
 
+/* Hero Section */
 .hero {
-  min-height: 70vh;
+  min-height: 90vh;
   max-height: 100vh;
   background-image: url("/static/img/hero.webp");
   background-size: cover;
@@ -259,6 +272,7 @@ img {
   animation-fill-mode: both;
 }
 
+/* About Section */
 .about {
   background-color: var(--light-color);
 }
@@ -340,6 +354,7 @@ img {
   transform: scale(1.02);
 }
 
+/* Services Section */
 .services {
   background-color: var(--primary-color);
   color: var(--text-light);
@@ -415,6 +430,7 @@ img {
   margin-bottom: 15px;
 }
 
+/* Gallery Section */
 .gallery {
   background-color: var(--light-color);
 }
@@ -460,6 +476,7 @@ img {
   opacity: 1;
 }
 
+/* Testimonials Section */
 .testimonials {
   background-color: var(--primary-color);
   color: var(--text-light);
@@ -533,6 +550,7 @@ img {
   font-size: 0.9rem;
 }
 
+/* Booking Section */
 .booking {
   background-color: var(--light-color);
 }
@@ -581,6 +599,7 @@ img {
   flex: 1;
 }
 
+/* Pricing Table */
 .pricing-table {
   margin-bottom: 40px;
   text-align: center;
@@ -668,6 +687,7 @@ img {
   padding: 12px;
 }
 
+/* Footer */
 footer {
   background-color: var(--primary-color);
   color: var(--text-light);
@@ -769,6 +789,7 @@ footer {
   width: 100%;
 }
 
+/* Map Section */
 .map-section {
   padding: 40px 0;
   background-color: var(--light-color);
@@ -837,6 +858,7 @@ footer {
   color: var(--primary-color);
 }
 
+/* Social Float (WhatsApp Only) */
 .social-float {
   position: fixed;
   bottom: 30px;
@@ -847,7 +869,6 @@ footer {
   z-index: 100;
 }
 
-.instagram-float,
 .whatsapp-float {
   display: flex;
   align-items: center;
@@ -862,24 +883,9 @@ footer {
   position: relative;
   right: 16px;
   bottom: 13px;
-}
-
-.instagram-float {
-  background: radial-gradient(
-    circle at 30% 107%,
-    #fdf497 0%,
-    #fdf497 5%,
-    #fd5949 45%,
-    #d6249f 60%,
-    #285aeb 90%
-  );
-}
-
-.whatsapp-float {
   background-color: #25d366;
 }
 
-.instagram-float:hover,
 .whatsapp-float:hover {
   transform: scale(1.1);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
@@ -887,10 +893,6 @@ footer {
 
 .whatsapp-animate {
   animation: whatsapp-bounce 2s infinite;
-}
-
-.instagram-animate {
-  animation: instagram-bounce 2s infinite;
 }
 
 @keyframes whatsapp-bounce {
@@ -909,24 +911,7 @@ footer {
   }
 }
 
-@keyframes instagram-bounce {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-10px);
-  }
-  60% {
-    transform: translateY(-5px);
-  }
-}
-
-.whatsapp-notification,
-.instagram-notification {
+.whatsapp-notification {
   position: absolute;
   right: 70px;
   top: 50%;
@@ -942,11 +927,11 @@ footer {
   pointer-events: none;
 }
 
-.whatsapp-notification.show,
-.instagram-notification.show {
+.whatsapp-notification.show {
   opacity: 1;
 }
 
+/* Media Queries */
 @media (max-width: 1200px) {
   .container {
     padding: 0 15px;
@@ -1010,14 +995,14 @@ footer {
   .navbar {
     padding: 5px 20px;
     justify-content: space-between;
-    height: auto;
+    height: 70px;
     flex-wrap: wrap;
   }
   .logo {
     justify-content: flex-start;
   }
   .logo-img {
-    height: 42px;
+    height: 62px;
   }
   .logo-text {
     font-size: 20px;
@@ -1283,11 +1268,13 @@ footer {
   }
 }
 
+/* Swiper Pagination */
 .swiper-pagination-bullets,
 .swiper-pagination-bullets.swiper-pagination-horizontal {
   bottom: -6px !important;
 }
 
+/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
